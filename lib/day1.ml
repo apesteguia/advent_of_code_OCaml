@@ -12,10 +12,11 @@ let find_first_num str : int =
     -1
   with Exit -> int_of_char str.[!found_index]
 
-let solve xs = 
-  let rec aux xs acc = 
-    match xs with 
+let solve xs =
+  let rec aux xs acc =
+    match xs with
     | [] -> 0
-    | h :: t -> let num = find_first_num h in 
-      aux t num
-  
+    | h :: t -> (
+        match find_first_num h with -1 -> aux t acc | x -> aux t (acc + x))
+  in
+  aux xs 0
